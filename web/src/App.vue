@@ -1,38 +1,23 @@
 <template>
-  <div id="nav">
-    <div>bot: {{a}}</div>
-  </div>
+  <NavBar/>
   <router-view/>
 </template>
 
 <script>
-  import $ from 'jquery';
-  import { ref } from 'vue'
+import NavBar from './components/NavBar.vue';
+import "bootstrap/dist/css/bootstrap.min.css"  // bootstrap 依赖
+import "bootstrap/dist/js/bootstrap"
 
-  export default {
-    name: "APP",
-    setup: () => {
-      let a = ref("");
-      // let b = ref("");
 
-      $.ajax({
-        url: "http://127.0.0.1:3000/pk/getinfo/",
-        type: "get",
-        success: resp => {
-          a = resp;
-        }
-      });
-
-      return {
-        a
-      }
-    }
-
-  }
+export default {
+  components: {
+    NavBar
+}
+}
 </script>
 <style>
   body {
-    background-image: url("./assets/background.png");
+    background-image: url("./assets/images/background.png");
     background-size: cover;
   }
 </style>
