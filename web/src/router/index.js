@@ -1,46 +1,65 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import PkIndexView from "../views/pk/PkIndexView"
 import RecordIndexView from "../views/record/RecordIndexView"
 import RankListIndexView from "../views/ranklist/RankListIndexView"
 import UserBotIndexView from "../views/user/bots/UserBotIndexView"
 import NotFound from "../views/error/NotFound"
+import UserAccountLoginView from '../views/user/account/UserAccountLoginView'
+import UserAccountRegisterView from '../views/user/account/UserAccountRegisterView'
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     name: "home",
-    redirect: "/pk/",
+    redirect: "/pk/"
   },
   {
     path: "/pk/",
+    name: "pk_index",
     component: PkIndexView,
-    name: "pk_index"
+  },
+
+  {
+    path: "/user/account/login/",
+    name: "user_account_login",
+    component: UserAccountLoginView,
+  },
+  {
+    path: "/user/account/register/",
+    name: "user_account_register",
+    component: UserAccountRegisterView,
   },
   {
     path: "/ranklist/",
+    name: "ranklist_index",
     component: RankListIndexView,
-    name: "ranklist_index"
   },
   {
     path: "/record/",
+    name: "record_index",
     component: RecordIndexView,
-    name: "record_index"
   },
   {
     path: "/user/bot/",
+    name: "user_bot_index",
     component: UserBotIndexView,
-    name: "userbot_index"
   },
   {
     path: "/404/",
-    component: NotFound,
     name: "404",
+    component: NotFound,
   },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/404/"
+  }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
+
 export default router
+
