@@ -51,7 +51,6 @@ export class Snake extends GameObject {
 
 
     check_tail_increasing() { // 检测当前回合蛇的长度是否增加，每3回合增加1
-        console.log(this.step);
         if(this.step < 10) return true;
         if(this.step % 3 === 1) return true;
         return false;
@@ -72,8 +71,6 @@ export class Snake extends GameObject {
         if (!this.gamemap.check_valid(this.next_cell)) {  // 下一步操作撞了，蛇瞬间去世
             this.status = "die";
         }
-
-        console.log(this.status);
     }
 
     update_move() { 

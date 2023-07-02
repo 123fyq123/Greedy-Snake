@@ -134,7 +134,6 @@ export default {
         VAceEditor
     },
 
-
     setup() {
         ace.config.set(
             "basePath", 
@@ -230,7 +229,6 @@ export default {
                 success(resp) {
                     if(resp.error_message === "success") {
                         refresh_bots();
-                        console.log("111");
                     }
                 }
             })
