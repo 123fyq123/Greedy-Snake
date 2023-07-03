@@ -3,13 +3,14 @@ import { Wall } from "./Wall";
 import { Snake } from './Snake';
 
 export class GameMap extends GameObject {
-    constructor(ctx, parent) {
+    constructor(ctx, parent, store) {
         super();
 
         this.ctx = ctx;
         this.parent = parent;
         this.L = 0;
-
+        this.store = store;
+        console.log(store);
         this.rows = 13;
         this.cols = 14;
         
@@ -20,12 +21,11 @@ export class GameMap extends GameObject {
             new Snake({id: 0, color: "#8A8A8A", r: this.rows - 2, c: 1}, this),
             new Snake({id: 1, color: "#4881C6", r: 1, c: this.cols - 2}, this),
         ]
+
     }
 
     start() {
-        for(let i = 0; i < 1000; i ++) {
-            if(this.create_walls()) break;
-        }
+        this.create_walls();
         this.add_listening_events();
     }
 
@@ -79,55 +79,9 @@ export class GameMap extends GameObject {
         }
     }
 
-    check_connectivity(g, sx, sy, tx, ty) {
-        if(sx == tx && sy == ty) return true;
-        g[sx][sy] = true;
-
-        let dx = [-1, 0, 1, 0];
-        let dy = [0, 1, 0, -1];
-        for(let i = 0; i < 4; i ++ ) {
-            let nx = sx + dx[i];
-            let ny = sy + dy[i];
-            if(!g[nx][ny] && this.check_connectivity(g, nx, ny, tx, ty)) return true; 
-        }
-    }
-
     create_walls() {
-        const g = [];
-        for(let r = 0; r < this.rows; r ++ ) {
-            g[r] = [];
-            for(let c = 0; c < this.cols; c ++ ) {
-                g[r][c] = false;
-            }
-        }
+        const g = this.store.state.pk.gamemap;
 
-        // 给四周加wall
-
-        for(let r = 0; r < this.rows; r ++ ) {
-            g[r][0] = g[r][this.cols - 1] = true;
-        }
-
-        for(let c = 0; c < this.cols; c ++ ) {
-            g[0][c] = g[this.rows - 1][c] = true;
-        }
-
-
-        // 创建随机障碍物
-        for(let i = 0; i < this.inner_walls_count; i ++ ) {
-            for(let j = 0; j < 1000; j ++ ) {
-                let r = parseInt(Math.random() * this.rows);
-                let c = parseInt(Math.random() * this.cols);
-                if(g[r][c] || g[c][r]) continue;
-                if(r == this.rows - 2 && c == 1 || r == 1 && c == this.cols - 2) continue;
-                g[r][c] = g[this.rows - 1 - r][this.cols - c - 1] = true;
-                break;
-            }
-        }
-
-        const copy_g = JSON.parse(JSON.stringify(g));
-        if(!this.check_connectivity(copy_g, this.rows - 2, 1, 1, this.cols - 2)) {
-            return false;
-        } 
         for(let r = 0; r < this.rows; r ++ ) {
             for(let c = 0; c < this.cols; c ++ ) {
                 if(g[r][c]) {
