@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Player {
     private Integer id;
+    private Integer botId; // -1表示亲自出马。否则用AI
+    private String botCode;
     private Integer sx;
     private Integer sy;
     private List<Integer> steps; // 记录所有的步数，后序可以用来回放
