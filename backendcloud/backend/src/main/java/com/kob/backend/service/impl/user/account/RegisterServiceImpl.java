@@ -54,11 +54,6 @@ public class RegisterServiceImpl implements RegisterService {
             return map;
         }
 
-        if(password.length() < 6) {
-            map.put("error_message", "密码长度不能小于6");
-            return map;
-        }
-
         if (!password.equals(confirmedPassword)) {
             map.put("error_message", "两次输入的密码不一致");
             return map;
@@ -73,7 +68,13 @@ public class RegisterServiceImpl implements RegisterService {
         }
 
         String encodedPassword = passwordEncoder.encode(password);
-        String photo = "https://cn.bing.com/images/search?q=%E7%8B%97%E5%A4%B4%E7%85%A7%E7%89%87&FORM=IQFRBA&id=2A662BA2F3A83FD184766605969B1F55C74DA82F";
+        int photo_id = (int)(Math.random() * 3);
+        String[] photos = {
+            "https://cdn.acwing.com/media/user/profile/photo/232800_lg_8aecf09a17.jpg",
+            "https://cdn.acwing.com/media/user/profile/photo/314870_lg_a32f8fcff1.jpg",
+            "https://cdn.acwing.com/media/user/profile/photo/234311_lg_2059b62047.jpg",
+        };
+        String photo = photos[photo_id];
         User user = new User(null, username, encodedPassword, photo, 1500);
         userMapper.insert(user);
 

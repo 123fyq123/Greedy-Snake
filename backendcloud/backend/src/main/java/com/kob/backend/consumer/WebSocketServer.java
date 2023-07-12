@@ -74,7 +74,6 @@ public class WebSocketServer {
         } else {
             this.session.close();
         }
-        System.out.println(users);
     }
 
     @OnClose
@@ -166,7 +165,6 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message, Session session) {
         // 从Client接收消息
-        System.out.println("received message!");
         JSONObject data = JSONObject.parseObject(message);
         String event = data.getString("event");
         if("start-matching".equals(event)) {
@@ -174,7 +172,6 @@ public class WebSocketServer {
         } else if("stop-matching".equals(event)) {
             stopMatching();
         } else if("move".equals(event)) {
-            System.out.println(data.getInteger("direction"));
             move(data.getInteger("direction")); // client向后端传入方向
         }
     }
