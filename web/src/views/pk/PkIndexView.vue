@@ -24,6 +24,7 @@ export default {
         const socketUrl = `ws://127.0.0.1:3000/websocket/${store.state.user.id}/`;
 
         store.commit("updateLoser", "none");
+        store.commit("updateIsRecord", false);
 
         onMounted(() => {  //被挂载时执行，也就是页面打开时执行
             store.commit("updateOpponent", {

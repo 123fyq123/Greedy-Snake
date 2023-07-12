@@ -31,7 +31,7 @@ public class WebSocketServer {
     public final static ConcurrentHashMap<Integer, WebSocketServer> users = new ConcurrentHashMap<>();
 
     private static BotMapper botMapper;
-    private static UserMapper userMapper;
+    public static UserMapper userMapper;
     public static RecordMapper recordMapper;
     public static RestTemplate restTemplate; // 向后端发送请求
 
