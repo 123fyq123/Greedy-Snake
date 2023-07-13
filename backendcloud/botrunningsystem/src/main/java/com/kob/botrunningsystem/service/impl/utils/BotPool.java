@@ -1,4 +1,4 @@
-package com.kob.botrunningsystem.service.utils;
+package com.kob.botrunningsystem.service.impl.utils;
 
 import java.util.LinkedList;
 import java.util.Queue;

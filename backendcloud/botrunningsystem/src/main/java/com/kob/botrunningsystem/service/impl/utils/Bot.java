@@ -1,4 +1,4 @@
-package com.kob.botrunningsystem.service.utils;
+package com.kob.botrunningsystem.service.impl.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
